@@ -14,7 +14,7 @@ int main() {
     sf::Font font;
     // Note: You need a .ttf file in your project folder. 
     // "Consolas" or "Courier New" work best for ASCII.
-    if (!font.loadFromFile("arial.ttf")) { 
+    if (!font.loadFromFile("DejaVuSans.ttf")) { 
         std::cerr << "Error loading font" << std::endl;
         return -1;
     }
