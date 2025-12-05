@@ -11,14 +11,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # We request specific components: graphics, window, and system
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
-# Define our source files
-set(SOURCES src/main.cpp)
-
-# Create the executable named "RogueGame"
+# Add Game.cpp to the source list
+set(SOURCES src/main.cpp src/Game.cpp)
 add_executable(RogueGame ${SOURCES})
 
-# Link SFML to our executable
 target_link_libraries(RogueGame PRIVATE sfml-graphics sfml-window sfml-system)
-
-# Include the "include" directory so we can use #include "header.h" cleanly
 target_include_directories(RogueGame PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
