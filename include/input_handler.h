@@ -11,13 +11,13 @@ public:
     ~InputHandler();
 
     // Returns a pointer to the command, or nullptr if no relevant key was pressed
-    Command* handleInput(sf::Keyboard::Key key);
+    Command* HandleInput(sf::Keyboard::Key key);
 
 private:
     // We own the command objects
-    std::unique_ptr<Command> m_buttonUp;
-    std::unique_ptr<Command> m_buttonDown;
-    std::unique_ptr<Command> m_buttonLeft;
-    std::unique_ptr<Command> m_buttonRight;
-    std::unique_ptr<Command> m_buttonEscape;
+    std::unique_ptr<Command> button_up_;
+    std::unique_ptr<Command> button_down_;
+    std::unique_ptr<Command> button_left_;
+    std::unique_ptr<Command> button_right_;
+    std::unique_ptr<Command> button_escape_;
 };

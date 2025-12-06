@@ -13,7 +13,7 @@ find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
 # ✅ THE NEW, AUTOMATIC WAY (Using globbing)
 file(GLOB_RECURSE SOURCES 
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc"
 )
 
 # Now, add the executable using the automatically generated list
