@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "input_handler.h"
+#include "renderer.h"
 
 class Game {
  public:
@@ -17,10 +18,11 @@ class Game {
   void Update();
   void Render();
 
-  sf::RenderWindow window_;
+
   sf::Font font_;
   sf::Text player_symbol_;
   InputHandler input_handler_;
+  Renderer renderer_;
 
   int player_x_;
   int player_y_;

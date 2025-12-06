@@ -11,12 +11,13 @@ class Renderer {
   Renderer(unsigned int width, unsigned int height, const std::string& title);
   ~Renderer();
 
-  void Render();
 
   // Core Loop methods
   void Clear();
   void Display();
   bool IsWindowOpen() const;
+  bool PollEvent(sf::Event& event);
+  void CloseWindow();
 
   // Drawing methods
   void DrawPlayer(int x, int y);
@@ -26,6 +27,7 @@ class Renderer {
   sf::RenderWindow window_;
   sf::Font font_;
   sf::Text player_symbol_;
+  sf::Text tile_symbol_;
 
   static constexpr int kTileSize = 24;
   static constexpr int kCols = 40;

@@ -10,8 +10,7 @@ const int kRows = 30;
 }  // namespace
 
 Game::Game() 
-    : player_x_(10), player_y_(10) {
-    window_.create(sf::VideoMode(kCols * kTileSize, kRows * kTileSize), "My C++ Rogue Clone");
+    : player_x_(10), player_y_(10), renderer_(kCols * kTileSize, kRows * kTileSize, "My C++ Rogue Clone") {
     
     // Load Font
     if (!font_.loadFromFile("DejaVuSans.ttf")) { 
@@ -26,7 +25,7 @@ Game::Game()
 }
 
 void Game::Run() {
-    while (window_.isOpen()) {
+    while (renderer_.IsWindowOpen()) {
         ProcessEvents();
         Update();
         Render();
@@ -40,9 +39,10 @@ void Game::MovePlayer(int dx, int dy) {
 
 void Game::ProcessEvents() {
     sf::Event event;
-    while (window_.pollEvent(event)) {
+    while (renderer_.PollEvent(event)) {
         if (event.type == sf::Event::Closed)
-            window_.close();
+            renderer_.CloseWindow();
+
  
         if (event.type == sf::Event::KeyPressed) {
             Command* command = input_handler_.HandleInput(event.key.code);
@@ -59,11 +59,16 @@ void Game::Update() {
 }
 
 void Game::Render() {
-    window_.clear();
-    window_.draw(player_symbol_);
-    window_.display();
+    renderer_.Clear(); 
+
+    renderer_.DrawDebugGrid(kCols, kRows);
+    
+    // 2. Draw Entities
+    renderer_.DrawPlayer(player_x_, player_y_);
+    
+    renderer_.Display();
 }
 
 void Game::Quit() {
-    window_.close();
+    renderer_.CloseWindow();
 }
