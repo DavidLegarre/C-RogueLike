@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Command.h"
 #include <iostream>
 
 // Constants (Keep them local to this file if only used here)
@@ -6,7 +7,7 @@ const int TILE_SIZE = 24;
 const int COLS = 40;
 const int ROWS = 30;
 
-// 1. Constructor: Initialize variables and load resources
+// Constructor: Initialize variables and load resources
 Game::Game() 
     : mPlayerX(10), mPlayerY(10) // Member Initialization List
 {
@@ -26,7 +27,7 @@ Game::Game()
     mPlayerSymbol.setFillColor(sf::Color::Yellow);
 }
 
-// 2. The Main Loop
+// The Main Loop
 void Game::run() {
     while (mWindow.isOpen()) {
         processEvents();
@@ -35,20 +36,25 @@ void Game::run() {
     }
 }
 
-// 3. Handle Input
+void Game::movePlayer(int dx, int dy) {
+    mPlayerX += dx;
+    mPlayerY += dy;
+}
+
 void Game::processEvents() {
     sf::Event event;
     while (mWindow.pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             mWindow.close();
 
-        if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Escape)
-                mWindow.close();
-            if (event.key.code == sf::Keyboard::Up) mPlayerY--;
-            if (event.key.code == sf::Keyboard::Down) mPlayerY++;
-            if (event.key.code == sf::Keyboard::Left) mPlayerX--;
-            if (event.key.code == sf::Keyboard::Right) mPlayerX++;
+       if (event.type == sf::Event::KeyPressed) {
+            // Ask the handler: "Does this key mean anything?"
+            Command* command = mInputHandler.handleInput(event.key.code);
+            
+            // If it does, execute it on *this* game instance
+            if (command) {
+                command->execute(*this);
+            }
         }
     }
 }
@@ -64,4 +70,8 @@ void Game::render() {
     mWindow.clear();
     mWindow.draw(mPlayerSymbol);
     mWindow.display();
+}
+
+void Game::quit() {
+    mWindow.close();
 }

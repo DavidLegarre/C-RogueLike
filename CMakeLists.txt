@@ -11,8 +11,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # We request specific components: graphics, window, and system
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
-# Add Game.cpp to the source list
-set(SOURCES src/main.cpp src/Game.cpp)
+# ✅ THE NEW, AUTOMATIC WAY (Using globbing)
+file(GLOB_RECURSE SOURCES 
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
+)
+
+# Now, add the executable using the automatically generated list
 add_executable(RogueGame ${SOURCES})
 
 target_link_libraries(RogueGame PRIVATE sfml-graphics sfml-window sfml-system)
