@@ -67,6 +67,7 @@ void Game::update() {
 
 // 5. Draw to Screen
 void Game::render() {
+    // TODO: Draw grid 
     mWindow.clear();
     mWindow.draw(mPlayerSymbol);
     mWindow.display();
